@@ -26,7 +26,6 @@ var infoHighlighted;
 var ox, oy;
 var x;
 var y;
-var mult = 2000;
 
 function preload() {
   data = loadJSON(filename+".json");
@@ -39,6 +38,7 @@ function setup() {
 
   x = data.x;
   y = data.y;
+  names = data.names;
 
   // draw the screen and turn off frame loop
   drawScreen();
@@ -56,9 +56,10 @@ function drawScreen() {
   for (var i=0; i<x.length; i++) {
     strokeWeight(1);
     fill(0);
-    tempX = map(x[i],0,1,0,width)
-    tempY = map(y[i],0,1,0,height)
-    rect(tempX, tempY, 10, 10);
+    tempX = map(x[i],0,1,margin.l,width-margin.r)
+    tempY = map(y[i],0,1,margin.t,height-margin.b)
+    //rect(tempX, tempY, 10, 10);
+    text(names[i],tempX, tempY);
   }
   pop();
 }
